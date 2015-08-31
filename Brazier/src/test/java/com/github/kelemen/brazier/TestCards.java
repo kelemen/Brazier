@@ -9,6 +9,7 @@ public final class TestCards {
     public static final String ABUSIVE_SERGEANT = "Abusive Sergeant";
     public static final String ALARM_O_BOT = "Alarm-o-Bot";
     public static final String ALDOR_PEACEKEEPER = "Aldor Peacekeeper";
+    public static final String AMANI_BERSERKER = "Amani Berserker";
     public static final String ANCIENT_MAGE = "Ancient Mage";
     public static final String AVENGE = "Avenge";
     public static final String BLACKWING_CORRUPTOR = "Blackwing Corruptor";
@@ -52,6 +53,8 @@ public final class TestCards {
     public static final String HEADCRACK = "Headcrack";
     public static final String HELLFIRE = "Hellfire";
     public static final String HOBGOBLIN = "Hobgoblin";
+    public static final String HOLY_LIGHT = "Holy Light";
+    public static final String HUMILITY = "Humility";
     public static final String HUNTERS_MARK = "Hunter's Mark";
     public static final String ICE_BARRIER = "Ice Barrier";
     public static final String ILLIDAN_STORMRAGE = "Illidan Stormrage";

@@ -11,6 +11,7 @@
             "filter": "TargetedActionConditions.SELF_DAMAGED",
             "aura": {
                 "class": "Auras.buffAura",
+                "priority": "normal",
                 "buff": {
                     "class": "Buffs.buffWeapon",
                     "attack": 2

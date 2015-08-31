@@ -12,6 +12,7 @@
             "filter": "TargetedActionConditions.SELF_DAMAGED",
             "aura": {
                 "class": "Auras.buffAura",
+                "priority": "normal",
                 "buff": "1/0"
             }
         }
