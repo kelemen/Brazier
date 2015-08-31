@@ -11,7 +11,7 @@
             "class": "Auras.cardAura",
             "filter": [
                 "CardAuras.TARGET_IS_MINION",
-                "MinionAuras.TARGET_IS_MECH",
+                "TargetedActionConditions.TARGET_IS_MECH",
                 "Auras.SAME_OWNER"
             ],
             "aura": {

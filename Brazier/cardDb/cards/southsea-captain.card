@@ -10,7 +10,7 @@
         "hp": 3,
         "ability": {
             "class": "MinionAbilities.sameBoardOthersAura",
-            "filter": "MinionAuras.TARGET_IS_PIRATE",
+            "filter": "TargetedActionConditions.TARGET_IS_PIRATE",
             "aura": {
                 "class": "Auras.buffAura",
                 "buff": "1/1"

@@ -1,5 +1,6 @@
 package com.github.kelemen.brazier.actions;
 
+import com.github.kelemen.brazier.BoardSide;
 import com.github.kelemen.brazier.Keyword;
 import com.github.kelemen.brazier.Keywords;
 import com.github.kelemen.brazier.LabeledEntity;
@@ -60,31 +61,31 @@ public final class EntityFilters {
         return ActionUtils.excludedKeywordsFilter(keywords);
     }
 
-    public static <Entity extends TargetableCharacter> Predicate<Entity> isBeast() {
+    public static <Entity extends LabeledEntity> Predicate<Entity> isBeast() {
         return withKeywords(Keywords.RACE_BEAST);
     }
 
-    public static <Entity extends TargetableCharacter> Predicate<Entity> isDemon() {
+    public static <Entity extends LabeledEntity> Predicate<Entity> isDemon() {
         return withKeywords(Keywords.RACE_DEMON);
     }
 
-    public static <Entity extends TargetableCharacter> Predicate<Entity> isDragon() {
+    public static <Entity extends LabeledEntity> Predicate<Entity> isDragon() {
         return withKeywords(Keywords.RACE_DRAGON);
     }
 
-    public static <Entity extends TargetableCharacter> Predicate<Entity> isMech() {
+    public static <Entity extends LabeledEntity> Predicate<Entity> isMech() {
         return withKeywords(Keywords.RACE_MECH);
     }
 
-    public static <Entity extends TargetableCharacter> Predicate<Entity> isMurloc() {
+    public static <Entity extends LabeledEntity> Predicate<Entity> isMurloc() {
         return withKeywords(Keywords.RACE_MURLOC);
     }
 
-    public static <Entity extends TargetableCharacter> Predicate<Entity> isPirate() {
+    public static <Entity extends LabeledEntity> Predicate<Entity> isPirate() {
         return withKeywords(Keywords.RACE_PIRATE);
     }
 
-    public static <Entity extends TargetableCharacter> Predicate<Entity> isTotem() {
+    public static <Entity extends LabeledEntity> Predicate<Entity> isTotem() {
         return withKeywords(Keywords.RACE_TOTEM);
     }
 
@@ -106,6 +107,16 @@ public final class EntityFilters {
 
     public static <Entity extends TargetableCharacter> Predicate<Entity> isFrozen() {
         return (target) -> target.getAttackTool().isFrozen();
+    }
+
+    public static <Entity extends PlayerProperty> Predicate<Entity> ownBoardHas(
+            @NamedArg("filter") Predicate<? super Minion> filter) {
+        ExceptionHelper.checkNotNullArgument(filter, "filter");
+
+        return (Entity target) -> {
+            BoardSide board = target.getOwner().getBoard();
+            return board.findMinion(filter) != null;
+        };
     }
 
     public static <Entity extends Minion> Predicate<Entity> isDeathRattle() {

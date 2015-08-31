@@ -24,7 +24,6 @@ import com.github.kelemen.brazier.UndoableResult;
 import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.abilities.ActivatableAbility;
 import com.github.kelemen.brazier.abilities.Aura;
-import com.github.kelemen.brazier.abilities.AuraFilter;
 import com.github.kelemen.brazier.abilities.AuraTargetProvider;
 import com.github.kelemen.brazier.abilities.Auras;
 import com.github.kelemen.brazier.abilities.Buff;
@@ -1099,9 +1098,9 @@ public final class TargetlessActions {
 
     private static ActivatableAbility<Player> deactivateAfterPlay(
             ActivatableAbility<Player> ability,
-            AuraFilter<? super Player, ? super Card> filter) {
+            TargetedActionCondition<? super Player, ? super Card> filter) {
         return deactivateAfterCardPlay(ability, (card) -> {
-            return filter.isApplicable(card.getWorld(), card.getOwner(), card);
+            return filter.applies(card.getWorld(), card.getOwner(), card);
         });
     }
 
@@ -1305,7 +1304,7 @@ public final class TargetlessActions {
 
     public static TargetlessAction<PlayerProperty> setManaCostThisTurn(
             @NamedArg("manaCost") int manaCost,
-            @NamedArg("filter") AuraFilter<? super Player, ? super Card> filter) {
+            @NamedArg("filter") TargetedActionCondition<? super Player, ? super Card> filter) {
         ExceptionHelper.checkNotNullArgument(filter, "filter");
 
         return (World world, PlayerProperty actor) -> {
@@ -1322,7 +1321,7 @@ public final class TargetlessActions {
 
     public static TargetlessAction<PlayerProperty> reduceManaCostThisTurn(
             @NamedArg("amount") int amount,
-            @NamedArg("filter") AuraFilter<? super Player, ? super Card> filter) {
+            @NamedArg("filter") TargetedActionCondition<? super Player, ? super Card> filter) {
         ExceptionHelper.checkNotNullArgument(filter, "filter");
 
         return (World world, PlayerProperty actor) -> {
@@ -1339,7 +1338,7 @@ public final class TargetlessActions {
 
     public static TargetlessAction<PlayerProperty> reduceManaCostNextCard(
             @NamedArg("amount") int amount,
-            @NamedArg("filter") AuraFilter<? super Player, ? super Card> filter) {
+            @NamedArg("filter") TargetedActionCondition<? super Player, ? super Card> filter) {
         ExceptionHelper.checkNotNullArgument(filter, "filter");
 
         return (World world, PlayerProperty actor) -> {
@@ -1356,12 +1355,12 @@ public final class TargetlessActions {
     public static <Target> TargetlessAction<PlayerProperty> untilTurnStartsAura(
             @NamedArg("target") AuraTargetProvider<? super Player, ? extends Target> target,
             @NamedArg("aura") Aura<? super Player, ? super Target> aura) {
-        return untilTurnStartsAura(target, AuraFilter.ANY, aura);
+        return untilTurnStartsAura(target, TargetedActionCondition.ANY, aura);
     }
 
     public static <Target> TargetlessAction<PlayerProperty> untilTurnStartsAura(
             @NamedArg("target") AuraTargetProvider<? super Player, ? extends Target> target,
-            @NamedArg("filter") AuraFilter<? super Player, ? super Target> filter,
+            @NamedArg("filter") TargetedActionCondition<? super Player, ? super Target> filter,
             @NamedArg("aura") Aura<? super Player, ? super Target> aura) {
 
         return (World world, PlayerProperty actor) -> {

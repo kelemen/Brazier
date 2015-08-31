@@ -2,6 +2,7 @@ package com.github.kelemen.brazier.abilities;
 
 import com.github.kelemen.brazier.Player;
 import com.github.kelemen.brazier.World;
+import com.github.kelemen.brazier.actions.TargetedActionCondition;
 import com.github.kelemen.brazier.actions.UndoAction;
 import com.github.kelemen.brazier.actions.UndoBuilder;
 import com.github.kelemen.brazier.events.UndoableUnregisterRef;
@@ -15,7 +16,7 @@ import org.jtrim.utils.ExceptionHelper;
 public final class TargetedActiveAura<Source, Target> implements ActiveAura {
     private final Source source;
     private final AuraTargetProvider<? super Source, ? extends Target> targetProvider;
-    private final AuraFilter<? super Source, ? super Target> targetFilter;
+    private final TargetedActionCondition<? super Source, ? super Target> targetFilter;
     private final Aura<? super Source, ? super Target> aura;
 
     private Map<Target, UndoableUnregisterRef> currentlyApplied;
@@ -23,7 +24,7 @@ public final class TargetedActiveAura<Source, Target> implements ActiveAura {
     public TargetedActiveAura(
             Source source,
             AuraTargetProvider<? super Source, ? extends Target> targetProvider,
-            AuraFilter<? super Source, ? super Target> targetFilter,
+            TargetedActionCondition<? super Source, ? super Target> targetFilter,
             Aura<? super Source, ? super Target> aura) {
         ExceptionHelper.checkNotNullArgument(source, "source");
         ExceptionHelper.checkNotNullArgument(targetProvider, "targetProvider");
@@ -51,7 +52,7 @@ public final class TargetedActiveAura<Source, Target> implements ActiveAura {
         Map<Target, UndoableUnregisterRef> currentlyAppliedCopy = new HashMap<>(currentlyApplied);
         for (Target target: targets) {
             UndoableUnregisterRef ref = currentlyAppliedCopy.remove(target);
-            boolean needAura = targetFilter.isApplicable(world, source, target);
+            boolean needAura = targetFilter.applies(world, source, target);
 
             if (ref == null) {
                 if (needAura) {

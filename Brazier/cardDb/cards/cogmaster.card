@@ -8,7 +8,7 @@
         "hp": 2,
         "ability": {
             "class": "Auras.selfAura",
-            "filter": "MinionAuras.OWN_BOARD_HAS_MECH",
+            "filter": "TargetedActionConditions.OWN_BOARD_HAS_MECH",
             "aura": {
                 "class": "Auras.buffAura",
                 "buff": "2/0"

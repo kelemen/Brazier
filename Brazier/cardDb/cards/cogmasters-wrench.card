@@ -9,7 +9,7 @@
         "charges": 3,
         "ability": {
             "class": "Auras.ownWeaponAura",
-            "filter": "MinionAuras.OWN_BOARD_HAS_MECH",
+            "filter": "TargetedActionConditions.OWN_BOARD_HAS_MECH",
             "aura": {
                 "class": "Auras.buffAura",
                 "buff": {

@@ -10,7 +10,7 @@
         "ability": {
             "class": "Auras.boardAura",
             "filter": [
-                "MinionAuras.TARGET_IS_MURLOC",
+                "TargetedActionConditions.TARGET_IS_MURLOC",
                 "Auras.NOT_SELF"
             ],
             "aura": {

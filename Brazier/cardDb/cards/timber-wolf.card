@@ -9,7 +9,7 @@
         "hp": 1,
         "ability": {
             "class": "MinionAbilities.sameBoardOthersAura",
-            "filter": "MinionAuras.TARGET_IS_BEAST",
+            "filter": "TargetedActionConditions.TARGET_IS_BEAST",
             "aura": {
                 "class": "Auras.buffAura",
                 "buff": "1/0"

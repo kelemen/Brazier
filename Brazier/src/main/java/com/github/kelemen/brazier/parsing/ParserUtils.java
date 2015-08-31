@@ -8,7 +8,6 @@ import com.github.kelemen.brazier.TargetableCharacter;
 import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.abilities.ActivatableAbility;
 import com.github.kelemen.brazier.abilities.Aura;
-import com.github.kelemen.brazier.abilities.AuraFilter;
 import com.github.kelemen.brazier.abilities.Buff;
 import com.github.kelemen.brazier.abilities.Buffs;
 import com.github.kelemen.brazier.abilities.LivingEntitiesAbilities;
@@ -120,13 +119,6 @@ public final class ParserUtils {
             Collection<Aura<Object, Object>> unsafeElements
                     = (Collection<Aura<Object, Object>>)elements;
             return Aura.merge(unsafeElements);
-        });
-        result.setTypeMerger(AuraFilter.class, (Collection<? extends AuraFilter<?, ?>> elements) -> {
-            // Unsafe but there is nothing to do.
-            @SuppressWarnings("unchecked")
-            Collection<? extends AuraFilter<Object, Object>> unsafeElements
-                    = (Collection<? extends AuraFilter<Object, Object>>)elements;
-            return AuraFilter.merge(unsafeElements);
         });
         result.setTypeMerger(WorldObjectAction.class, (Collection<? extends WorldObjectAction<?>> elements) -> {
             // Unsafe but there is nothing to do.
