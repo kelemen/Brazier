@@ -11,8 +11,11 @@
             "ability": {
                 "class": "Auras.sameBoardAura",
                 "aura": {
-                    "class": "MinionAuras.minHp",
-                    "hp": 1
+                    "class": "Auras.buffAura",
+                    "buff": {
+                        "class": "Buffs.minHp",
+                        "hp": 1
+                    }
                 }
             }
         },

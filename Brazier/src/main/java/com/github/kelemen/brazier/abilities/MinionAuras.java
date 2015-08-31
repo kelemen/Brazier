@@ -2,7 +2,6 @@ package com.github.kelemen.brazier.abilities;
 
 import com.github.kelemen.brazier.BoardLocationRef;
 import com.github.kelemen.brazier.BornEntity;
-import com.github.kelemen.brazier.Keyword;
 import com.github.kelemen.brazier.Keywords;
 import com.github.kelemen.brazier.LabeledEntity;
 import com.github.kelemen.brazier.Player;
@@ -10,14 +9,12 @@ import com.github.kelemen.brazier.PlayerProperty;
 import com.github.kelemen.brazier.SummonLocationRef;
 import com.github.kelemen.brazier.TargetableCharacter;
 import com.github.kelemen.brazier.World;
-import com.github.kelemen.brazier.actions.ActionUtils;
 import com.github.kelemen.brazier.minions.Minion;
 import com.github.kelemen.brazier.parsing.NamedArg;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
 import org.jtrim.utils.ExceptionHelper;
 
 public final class MinionAuras {
@@ -72,10 +69,6 @@ public final class MinionAuras {
         }
     };
 
-    public static final Aura<Object, Minion> UNTARGETABLE = (World world, Object source, Minion target) -> {
-        return target.getProperties().getBody().getUntargetableProperty().setValueToExternal(true);
-    };
-
     public static final AuraFilter<PlayerProperty, PlayerProperty> SAME_OWNER = (world, source, target) -> {
         return source.getOwner() == target.getOwner();
     };
@@ -86,10 +79,6 @@ public final class MinionAuras {
 
     public static final AuraFilter<Minion, Minion> NEXT_MINION = (world, source, target) -> {
         return target == tryGetLeft(source) || target == tryGetRight(source);
-    };
-
-    public static final Aura<Object, Minion> GRANT_IMMUNITY = (world, source, target) -> {
-        return target.getBody().getImmuneProperty().setValueToExternal(true);
     };
 
     public static AuraFilter<Object, Minion> minionTargetNameIs(@NamedArg("name") String name) {
@@ -107,29 +96,5 @@ public final class MinionAuras {
     private static Minion tryGetRight(Minion minion) {
         BoardLocationRef leftRef = minion.getLocationRef().tryGetRight();
         return leftRef != null ? leftRef.getMinion() : null;
-    }
-
-    public static Aura<Object, Minion> attackForOtherMinionsBuff(
-            @NamedArg("attack") int attack,
-            @NamedArg("keywords") Keyword[] keywords) {
-        Predicate<LabeledEntity> keywordFilter = ActionUtils.includedKeywordsFilter(keywords);
-        return (World world, Object source, Minion target) -> {
-            Predicate<Minion> filter = (minion) -> {
-                return target != minion && keywordFilter.test(minion);
-            };
-
-            return target.getBuffableAttack().addExternalBuff((prev) -> {
-                int count1 = world.getPlayer1().getBoard().countMinions(filter);
-                int count2 = world.getPlayer2().getBoard().countMinions(filter);
-
-                return prev + attack * (count1 + count2);
-            });
-        };
-    }
-
-    public static Aura<Object, Minion> minHp(@NamedArg("hp") int hp) {
-        return (World world, Object source, Minion target) -> {
-            return target.getBody().getMinHpProperty().addExternalBuff((prev) -> Math.max(prev, hp));
-        };
     }
 }

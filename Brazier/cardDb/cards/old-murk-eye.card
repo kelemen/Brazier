@@ -12,9 +12,12 @@
         "ability": {
             "class": "Auras.selfAura",
             "aura": {
-                "class": "MinionAuras.attackForOtherMinionsBuff",
-                "attack": 1,
-                "keywords": "murloc"
+                "class": "Auras.buffAura",
+                "buff": {
+                    "class": "Buffs.attackForOtherMinionsBuff",
+                    "attack": 1,
+                    "keywords": "murloc"
+                }
             }
         }
     }

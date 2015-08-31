@@ -32,6 +32,10 @@ public final class Buffs {
         }
     };
 
+    public static final Buff<Minion> UNTARGETABLE = (World world, Minion target, BuffArg arg) -> {
+        return target.getProperties().getBody().getUntargetableProperty().setValueTo(arg, true);
+    };
+
     public static final Buff<Minion> DOUBLE_ATTACK = (world, target, arg) -> {
         return target.getProperties().getBuffableAttack().addRemovableBuff(arg, (prev) -> 2 * prev);
     };
@@ -292,6 +296,30 @@ public final class Buffs {
                 hpBuffUndo.undo();
                 attackBuffUndo.undo();
             };
+        };
+    }
+
+    public static Buff<Minion> attackForOtherMinionsBuff(
+            @NamedArg("attack") int attack,
+            @NamedArg("keywords") Keyword[] keywords) {
+        Predicate<LabeledEntity> keywordFilter = ActionUtils.includedKeywordsFilter(keywords);
+        return (World world, Minion target, BuffArg arg) -> {
+            Predicate<Minion> filter = (minion) -> {
+                return target != minion && keywordFilter.test(minion);
+            };
+
+            return target.getBuffableAttack().addRemovableBuff(arg, (prev) -> {
+                int count1 = world.getPlayer1().getBoard().countMinions(filter);
+                int count2 = world.getPlayer2().getBoard().countMinions(filter);
+
+                return prev + attack * (count1 + count2);
+            });
+        };
+    }
+
+    public static Buff<Minion> minHp(@NamedArg("hp") int hp) {
+        return (World world, Minion target, BuffArg arg) -> {
+            return target.getBody().getMinHpProperty().addRemovableBuff(arg, (prev) -> Math.max(prev, hp));
         };
     }
 

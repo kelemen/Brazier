@@ -19,7 +19,10 @@
             },
             {
                 "class": "Auras.ownHeroAura",
-                "aura": "HeroAuras.GRANT_IMMUNITY"
+                "aura": {
+                    "class": "Auras.buffAura",
+                    "buff": "Buffs.IMMUNE"
+                }
             }
         ]
     }

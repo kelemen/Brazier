@@ -9,7 +9,10 @@
         "hp": 5,
         "ability": {
             "class": "MinionAbilities.neighboursAura",
-            "aura": "MinionAuras.UNTARGETABLE"
+            "aura": {
+                "class": "Auras.buffAura",
+                "buff": "Buffs.UNTARGETABLE"
+            }
         }
     }
 }
