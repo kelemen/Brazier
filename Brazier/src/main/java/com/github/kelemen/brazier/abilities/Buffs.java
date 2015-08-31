@@ -26,8 +26,7 @@ public final class Buffs {
     };
 
     public static final Buff<Player> DAMAGING_HEAL = (world, target, arg) -> {
-        // FIXME: Use arg
-        return target.getDamagingHealAura().addBuff(true);
+        return target.getDamagingHealAura().setValueTo(arg, true);
     };
 
     public static Buff<TargetableCharacter> IMMUNE = (World world, TargetableCharacter target, BuffArg arg) -> {
