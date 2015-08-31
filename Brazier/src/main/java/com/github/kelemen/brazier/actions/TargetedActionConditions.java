@@ -1,5 +1,6 @@
 package com.github.kelemen.brazier.actions;
 
+import com.github.kelemen.brazier.Keywords;
 import com.github.kelemen.brazier.LabeledEntity;
 import com.github.kelemen.brazier.PlayerProperty;
 import com.github.kelemen.brazier.TargetableCharacter;
@@ -15,6 +16,10 @@ public final class TargetedActionConditions {
     public static final TargetedActionCondition<Object, LabeledEntity> TARGET_IS_DRAGON = forTarget(EntityFilters.isDragon());
     public static final TargetedActionCondition<Object, LabeledEntity> TARGET_IS_PIRATE = forTarget(EntityFilters.isPirate());
     public static final TargetedActionCondition<Object, LabeledEntity> TARGET_IS_MURLOC = forTarget(EntityFilters.isMurloc());
+
+    public static final TargetedActionCondition<Object, LabeledEntity> TARGET_IS_MINION = forTarget(EntityFilters.withKeywords(Keywords.MINION));
+    public static final TargetedActionCondition<Object, LabeledEntity> TARGET_IS_SPELL = forTarget(EntityFilters.withKeywords(Keywords.SPELL));
+    public static final TargetedActionCondition<Object, LabeledEntity> TARGET_HAS_BATTLE_CRY = forTarget(EntityFilters.withKeywords(Keywords.BATTLE_CRY));
 
     public static final TargetedActionCondition<PlayerProperty, Object> OWN_BOARD_HAS_MECH = forActor(EntityFilters.ownBoardHas(EntityFilters.isMech()));
 

@@ -8,7 +8,7 @@
         "hp": 2,
         "ability": {
             "class": "Auras.ownCardAura",
-            "filter": "CardAuras.TARGET_IS_SPELL",
+            "filter": "TargetedActionConditions.TARGET_IS_SPELL",
             "aura": {
                 "class": "CardAuras.increaseManaCost",
                 "amount": -1

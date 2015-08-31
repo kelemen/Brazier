@@ -13,7 +13,7 @@
                 "class": "CardAuras.increaseManaCost",
                 "amount": 5
             },
-            "filter": "CardAuras.TARGET_IS_SPELL",
+            "filter": "TargetedActionConditions.TARGET_IS_SPELL",
             "target": "CardAuras.OPPONENT_CARD_PROVIDER"
         }
     }

@@ -8,7 +8,7 @@
         "hp": 4,
         "ability": {
             "class": "Auras.cardAura",
-            "filter": "CardAuras.TARGET_HAS_BATTLE_CRY",
+            "filter": "TargetedActionConditions.TARGET_HAS_BATTLE_CRY",
             "aura": {
                 "class": "CardAuras.increaseManaCost",
                 "amount": 2

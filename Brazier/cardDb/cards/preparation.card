@@ -8,6 +8,6 @@
     "playActions": {
         "class": "TargetlessActions.reduceManaCostThisTurn",
         "amount": 3,
-        "filter": "CardAuras.TARGET_IS_SPELL"
+        "filter": "TargetedActionConditions.TARGET_IS_SPELL"
     }
 }
