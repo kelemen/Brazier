@@ -1,6 +1,5 @@
 package com.github.kelemen.brazier.abilities;
 
-import com.github.kelemen.brazier.Player;
 import com.github.kelemen.brazier.PreparedResult;
 import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.WorldProperty;
@@ -12,7 +11,6 @@ import com.github.kelemen.brazier.events.WorldActionEventsRegistry;
 import com.github.kelemen.brazier.events.WorldEventAction;
 import com.github.kelemen.brazier.events.WorldEventFilter;
 import com.github.kelemen.brazier.events.WorldEvents;
-import com.github.kelemen.brazier.minions.Minion;
 import com.github.kelemen.brazier.parsing.NamedArg;
 import java.util.ArrayList;
 import java.util.List;

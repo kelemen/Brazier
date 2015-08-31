@@ -15,7 +15,6 @@ import com.github.kelemen.brazier.UndoableRegistry;
 import com.github.kelemen.brazier.UndoableResult;
 import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.abilities.ActivatableAbility;
-import com.github.kelemen.brazier.abilities.BuffArg;
 import com.github.kelemen.brazier.abilities.HpProperty;
 import com.github.kelemen.brazier.cards.Card;
 import com.github.kelemen.brazier.cards.CardDescr;
