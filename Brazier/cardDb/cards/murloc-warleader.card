@@ -15,9 +15,8 @@
                 "Auras.NOT_SELF"
             ],
             "aura": {
-                "class": "MinionAuras.bodyBuff",
-                "attack": 2,
-                "hp": 1
+                "class": "Auras.buffAura",
+                "buff": "2/1"
             }
         }
     }

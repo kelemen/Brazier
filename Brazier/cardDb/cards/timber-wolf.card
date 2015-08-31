@@ -11,8 +11,8 @@
             "class": "MinionAbilities.sameBoardOthersAura",
             "filter": "MinionAuras.TARGET_IS_BEAST",
             "aura": {
-                "class": "MinionAuras.attackBuff",
-                "attack": 1
+                "class": "Auras.buffAura",
+                "buff": "1/0"
             }
         }
     }

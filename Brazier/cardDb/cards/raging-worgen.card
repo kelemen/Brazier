@@ -11,8 +11,8 @@
             "filter": "MinionAuras.SELF_DAMAGED",
             "aura": [
                 {
-                    "class": "MinionAuras.attackBuff",
-                    "attack": 1
+                    "class": "Auras.buffAura",
+                    "buff": "1/0"
                 },
                 "MinionAuras.WIND_FURY"
             ]

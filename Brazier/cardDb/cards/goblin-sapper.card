@@ -14,8 +14,8 @@
                 "limit": 5
             },
             "aura": {
-                "class": "MinionAuras.attackBuff",
-                "attack": 4
+                "class": "Auras.buffAura",
+                "buff": "4/0"
             }
         }
     }

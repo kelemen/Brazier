@@ -10,8 +10,8 @@
         "ability": {
             "class": "MinionAbilities.neighboursAura",
             "aura": {
-                "class": "MinionAuras.attackBuff",
-                "attack": 1
+                "class": "Auras.buffAura",
+                "buff": "1/0"
             }
         }
     }

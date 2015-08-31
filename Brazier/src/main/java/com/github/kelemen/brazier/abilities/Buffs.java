@@ -4,11 +4,13 @@ import com.github.kelemen.brazier.BoardSide;
 import com.github.kelemen.brazier.Hero;
 import com.github.kelemen.brazier.Keyword;
 import com.github.kelemen.brazier.LabeledEntity;
+import com.github.kelemen.brazier.Priorities;
 import com.github.kelemen.brazier.TargetableCharacter;
 import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.actions.ActionUtils;
 import com.github.kelemen.brazier.actions.UndoAction;
 import com.github.kelemen.brazier.events.UndoableUnregisterRef;
+import com.github.kelemen.brazier.events.UndoableUnregisterRefBuilder;
 import com.github.kelemen.brazier.minions.Minion;
 import com.github.kelemen.brazier.parsing.NamedArg;
 import com.github.kelemen.brazier.weapons.Weapon;
@@ -159,23 +161,46 @@ public final class Buffs {
         };
     }
 
+    private static UndoableUnregisterRef buffHp(BuffArg arg, TargetableCharacter target, int hp) {
+        if (hp != 0 && (arg.getPriority() != Priorities.HIGH_PRIORITY || !arg.isExternal())) {
+            throw new UnsupportedOperationException("Temporary health buffs are only supported standard auras.");
+        }
+
+        HpProperty hpProperty = ActionUtils.tryGetHp(target);
+        if (hpProperty == null) {
+            return UndoableUnregisterRef.UNREGISTERED_REF;
+        }
+
+        return hpProperty.addAuraBuff(hp);
+    }
+
+    private static UndoableUnregisterRef buffAttack(BuffArg arg, TargetableCharacter target, int attack) {
+        if (target instanceof Minion) {
+            return ((Minion)target).getBuffableAttack().addRemovableBuff(arg, attack);
+        }
+        if (target instanceof Hero) {
+            // FIXME: This is only OK because everything buffing a hero's
+            //        attack only lasts until the end of turn.
+            return ((Hero)target).addExtraAttackForThisTurn(attack);
+        }
+        return UndoableUnregisterRef.UNREGISTERED_REF;
+    }
+
     public static Buff<TargetableCharacter> buffRemovable(
             @NamedArg("attack") int attack,
             @NamedArg("hp") int hp) {
-        if (hp != 0) {
-            throw new UnsupportedOperationException("Temporary health buffs are not yet supported.");
+        if (hp == 0) {
+            return (world, target, arg) -> buffAttack(arg, target, attack);
+        }
+        if (attack == 0) {
+            return (world, target, arg) -> buffHp(arg, target, hp);
         }
 
         return (World world, TargetableCharacter target, BuffArg arg) -> {
-            if (target instanceof Minion) {
-                return ((Minion)target).getBuffableAttack().addRemovableBuff(arg, attack);
-            }
-            if (target instanceof Hero) {
-                // FIXME: This is only OK because everything buffing a hero's
-                //        attack only lasts until the end of turn.
-                return ((Hero)target).addExtraAttackForThisTurn(attack);
-            }
-            return UndoableUnregisterRef.UNREGISTERED_REF;
+            UndoableUnregisterRefBuilder result = new UndoableUnregisterRefBuilder(2);
+            result.addRef(buffAttack(arg, target, attack));
+            result.addRef(buffHp(arg, target, hp));
+            return result;
         };
     }
 
@@ -193,15 +218,19 @@ public final class Buffs {
         };
     }
 
-    public static PermanentBuff<Weapon> buffWeapon(@NamedArg("attack") int attack) {
-        return buffWeapon(attack, 0);
+    private static Buff<Weapon> buffWeaponAttack(@NamedArg("attack") int attack) {
+        return (world, target, arg) -> target.getBuffableAttack().addRemovableBuff(arg, attack);
+    }
+
+    public static Buff<Weapon> buffWeapon(@NamedArg("attack") int attack) {
+        return buffWeaponAttack(attack);
     }
 
     public static PermanentBuff<Weapon> buffWeapon(
             @NamedArg("attack") int attack,
             @NamedArg("charges") int charges) {
         if (charges == 0) {
-            return (world, target, arg) -> target.getBuffableAttack().addBuff(arg, attack);
+            return buffWeaponAttack(attack).toPermanent();
         }
 
         return (world, target, arg) -> {

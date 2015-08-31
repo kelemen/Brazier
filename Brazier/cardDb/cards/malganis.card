@@ -13,9 +13,8 @@
                 "class": "MinionAbilities.sameBoardOthersAura",
                 "filter": "MinionAuras.TARGET_IS_DEMON",
                 "aura": {
-                    "class": "MinionAuras.bodyBuff",
-                    "attack": 2,
-                    "hp": 2
+                    "class": "Auras.buffAura",
+                    "buff": "2/2"
                 }
             },
             {

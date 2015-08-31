@@ -12,9 +12,8 @@
             "class": "MinionAbilities.sameBoardOthersAura",
             "filter": "MinionAuras.TARGET_IS_PIRATE",
             "aura": {
-                "class": "MinionAuras.bodyBuff",
-                "attack": 1,
-                "hp": 1
+                "class": "Auras.buffAura",
+                "buff": "1/1"
             }
         }
     }

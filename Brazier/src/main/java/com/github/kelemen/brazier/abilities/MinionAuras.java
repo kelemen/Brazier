@@ -11,7 +11,6 @@ import com.github.kelemen.brazier.SummonLocationRef;
 import com.github.kelemen.brazier.TargetableCharacter;
 import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.actions.ActionUtils;
-import com.github.kelemen.brazier.events.UndoableUnregisterRefBuilder;
 import com.github.kelemen.brazier.minions.Minion;
 import com.github.kelemen.brazier.parsing.NamedArg;
 import java.util.ArrayList;
@@ -121,6 +120,7 @@ public final class MinionAuras {
             @NamedArg("keywords") Keyword[] keywords) {
         Predicate<LabeledEntity> keywordFilter = ActionUtils.includedKeywordsFilter(keywords);
         return (World world, Object source, Minion target) -> {
+            // FIXME: This aura has to update after every minion added.
             Predicate<Minion> filter = (minion) -> {
                 return target != minion && keywordFilter.test(minion);
             };
@@ -130,31 +130,6 @@ public final class MinionAuras {
 
             int buff = attack * (count1 + count2);
             return target.getBuffableAttack().addExternalBuff(buff);
-        };
-    }
-
-    public static Aura<Object, Minion> attackBuff(@NamedArg("attack") int attack) {
-        return (World world, Object source, Minion target) -> {
-            return target.getBuffableAttack().addExternalBuff(attack);
-        };
-    }
-
-    public static Aura<Object, Minion> hpBuff(@NamedArg("hp") int hp) {
-        return (World world, Object source, Minion target) -> {
-            return target.getBody().getHp().addAuraBuff(hp);
-        };
-    }
-
-    public static Aura<Object, Minion> bodyBuff(
-            @NamedArg("attack") int attack,
-            @NamedArg("hp") int hp) {
-        return (World world, Object source, Minion target) -> {
-            UndoableUnregisterRefBuilder result = new UndoableUnregisterRefBuilder(2);
-
-            result.addRef(target.getBuffableAttack().addExternalBuff(attack));
-            result.addRef(target.getBody().getHp().addAuraBuff(hp));
-
-            return result;
         };
     }
 
