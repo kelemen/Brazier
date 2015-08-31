@@ -17,7 +17,7 @@
                 }
             },
             "filter": "TargetedActionConditions.TARGET_IS_SPELL",
-            "target": "CardAuras.OPPONENT_CARD_PROVIDER"
+            "target": "AuraTargets.OPPONENT_CARD_PROVIDER"
         }
     }
 }

@@ -108,112 +108,112 @@ public final class Auras {
 
     public static <Self extends PlayerProperty> ActivatableAbility<Self> sameBoardAura(
             @NamedArg("aura") Aura<? super Self, ? super Minion> aura) {
-        return aura(MinionAuras.SAME_BOARD_MINION_PROVIDER, TargetedActionCondition.ANY, aura);
+        return aura(AuraTargets.SAME_BOARD_MINION_PROVIDER, TargetedActionCondition.ANY, aura);
     }
 
     public static <Self extends PlayerProperty> ActivatableAbility<Self> sameBoardAura(
             @NamedArg("filter") TargetedActionCondition<? super Self, ? super Minion> filter,
             @NamedArg("aura") Aura<? super Self, ? super Minion> aura) {
-        return aura(MinionAuras.SAME_BOARD_MINION_PROVIDER, filter, aura);
+        return aura(AuraTargets.SAME_BOARD_MINION_PROVIDER, filter, aura);
     }
 
     public static <Self extends WorldProperty> ActivatableAbility<Self> boardAura(
             @NamedArg("aura") Aura<? super Self, ? super Minion> aura) {
-        return aura(MinionAuras.MINION_PROVIDER, TargetedActionCondition.ANY, aura);
+        return aura(AuraTargets.MINION_PROVIDER, TargetedActionCondition.ANY, aura);
     }
 
     public static <Self extends WorldProperty> ActivatableAbility<Self> boardAura(
             @NamedArg("filter") TargetedActionCondition<? super Self, ? super Minion> filter,
             @NamedArg("aura") Aura<? super Self, ? super Minion> aura) {
-        return aura(MinionAuras.MINION_PROVIDER, filter, aura);
+        return aura(AuraTargets.MINION_PROVIDER, filter, aura);
     }
 
     public static <Self extends PlayerProperty> ActivatableAbility<Self> ownCardAura(
             @NamedArg("aura") Aura<? super Self, ? super Card> aura) {
-        return aura(CardAuras.OWN_CARD_PROVIDER, TargetedActionCondition.ANY, aura);
+        return aura(AuraTargets.OWN_CARD_PROVIDER, TargetedActionCondition.ANY, aura);
     }
 
     public static <Self extends PlayerProperty> ActivatableAbility<Self> ownCardAura(
             @NamedArg("filter") TargetedActionCondition<? super Self, ? super Card> filter,
             @NamedArg("aura") Aura<? super Self, ? super Card> aura) {
-        return aura(CardAuras.OWN_CARD_PROVIDER, filter, aura);
+        return aura(AuraTargets.OWN_CARD_PROVIDER, filter, aura);
     }
 
     public static <Self extends WorldProperty> ActivatableAbility<Self> cardAura(
             @NamedArg("aura") Aura<? super Self, ? super Card> aura) {
-        return aura(CardAuras.CARD_PROVIDER, TargetedActionCondition.ANY, aura);
+        return aura(AuraTargets.CARD_PROVIDER, TargetedActionCondition.ANY, aura);
     }
 
     public static <Self extends WorldProperty> ActivatableAbility<Self> cardAura(
             @NamedArg("filter") TargetedActionCondition<? super Self, ? super Card> filter,
             @NamedArg("aura") Aura<? super Self, ? super Card> aura) {
-        return aura(CardAuras.CARD_PROVIDER, filter, aura);
+        return aura(AuraTargets.CARD_PROVIDER, filter, aura);
     }
 
     public static <Self extends PlayerProperty> ActivatableAbility<Self> ownHeroAura(
             @NamedArg("aura") Aura<? super Self, ? super Hero> aura) {
-        return aura(HeroAuras.OWN_HERO_PROVIDER, TargetedActionCondition.ANY, aura);
+        return aura(AuraTargets.OWN_HERO_PROVIDER, TargetedActionCondition.ANY, aura);
     }
 
     public static <Self extends PlayerProperty> ActivatableAbility<Self> ownHeroAura(
             @NamedArg("filter") TargetedActionCondition<? super Self, ? super Hero> filter,
             @NamedArg("aura") Aura<? super Self, ? super Hero> aura) {
-        return aura(HeroAuras.OWN_HERO_PROVIDER, filter, aura);
+        return aura(AuraTargets.OWN_HERO_PROVIDER, filter, aura);
     }
 
     public static <Self extends WorldProperty> ActivatableAbility<Self> heroAura(
             @NamedArg("aura") Aura<? super Self, ? super Hero> aura) {
-        return aura(HeroAuras.HERO_PROVIDER, TargetedActionCondition.ANY, aura);
+        return aura(AuraTargets.HERO_PROVIDER, TargetedActionCondition.ANY, aura);
     }
 
     public static <Self extends WorldProperty> ActivatableAbility<Self> heroAura(
             @NamedArg("filter") TargetedActionCondition<? super Self, ? super Hero> filter,
             @NamedArg("aura") Aura<? super Self, ? super Hero> aura) {
-        return aura(HeroAuras.HERO_PROVIDER, filter, aura);
+        return aura(AuraTargets.HERO_PROVIDER, filter, aura);
     }
 
     public static <Self extends PlayerProperty> ActivatableAbility<Self> ownPlayerAura(
             @NamedArg("aura") Aura<? super Self, ? super Player> aura) {
-        return aura(HeroAuras.OWN_PLAYER_PROVIDER, TargetedActionCondition.ANY, aura);
+        return aura(AuraTargets.OWN_PLAYER_PROVIDER, TargetedActionCondition.ANY, aura);
     }
 
     public static <Self extends PlayerProperty> ActivatableAbility<Self> ownPlayerAura(
             @NamedArg("filter") TargetedActionCondition<? super Self, ? super Player> filter,
             @NamedArg("aura") Aura<? super Self, ? super Player> aura) {
-        return aura(HeroAuras.OWN_PLAYER_PROVIDER, filter, aura);
+        return aura(AuraTargets.OWN_PLAYER_PROVIDER, filter, aura);
     }
 
     public static <Self extends WorldProperty> ActivatableAbility<Self> playerAura(
             @NamedArg("aura") Aura<? super Self, ? super Player> aura) {
-        return aura(HeroAuras.PLAYER_PROVIDER, TargetedActionCondition.ANY, aura);
+        return aura(AuraTargets.PLAYER_PROVIDER, TargetedActionCondition.ANY, aura);
     }
 
     public static <Self extends WorldProperty> ActivatableAbility<Self> playerAura(
             @NamedArg("filter") TargetedActionCondition<? super Self, ? super Player> filter,
             @NamedArg("aura") Aura<? super Self, ? super Player> aura) {
-        return aura(HeroAuras.PLAYER_PROVIDER, filter, aura);
+        return aura(AuraTargets.PLAYER_PROVIDER, filter, aura);
     }
 
     public static <Self extends PlayerProperty> ActivatableAbility<Self> ownWeaponAura(
             @NamedArg("aura") Aura<? super Self, ? super Weapon> aura) {
-        return aura(WeaponAuras.OWN_WEAPON_PROVIDER, TargetedActionCondition.ANY, aura);
+        return aura(AuraTargets.OWN_WEAPON_PROVIDER, TargetedActionCondition.ANY, aura);
     }
 
     public static <Self extends PlayerProperty> ActivatableAbility<Self> ownWeaponAura(
             @NamedArg("filter") TargetedActionCondition<? super Self, ? super Weapon> filter,
             @NamedArg("aura") Aura<? super Self, ? super Weapon> aura) {
-        return aura(WeaponAuras.OWN_WEAPON_PROVIDER, filter, aura);
+        return aura(AuraTargets.OWN_WEAPON_PROVIDER, filter, aura);
     }
 
     public static <Self extends WorldProperty> ActivatableAbility<Self> weaponAura(
             @NamedArg("aura") Aura<? super Self, ? super Weapon> aura) {
-        return aura(WeaponAuras.WEAPON_PROVIDER, TargetedActionCondition.ANY, aura);
+        return aura(AuraTargets.WEAPON_PROVIDER, TargetedActionCondition.ANY, aura);
     }
 
     public static <Self extends WorldProperty> ActivatableAbility<Self> weaponAura(
             @NamedArg("filter") TargetedActionCondition<? super Self, ? super Weapon> filter,
             @NamedArg("aura") Aura<? super Self, ? super Weapon> aura) {
-        return aura(WeaponAuras.WEAPON_PROVIDER, filter, aura);
+        return aura(AuraTargets.WEAPON_PROVIDER, filter, aura);
     }
 
     public static <Self extends WorldProperty, Target> ActivatableAbility<Self> aura(

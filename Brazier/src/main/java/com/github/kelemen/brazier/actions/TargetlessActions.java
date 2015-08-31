@@ -25,10 +25,10 @@ import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.abilities.ActivatableAbility;
 import com.github.kelemen.brazier.abilities.Aura;
 import com.github.kelemen.brazier.abilities.AuraTargetProvider;
+import com.github.kelemen.brazier.abilities.AuraTargets;
 import com.github.kelemen.brazier.abilities.Auras;
 import com.github.kelemen.brazier.abilities.Buff;
 import com.github.kelemen.brazier.abilities.Buffs;
-import com.github.kelemen.brazier.abilities.CardAuras;
 import com.github.kelemen.brazier.abilities.PermanentBuff;
 import com.github.kelemen.brazier.abilities.TargetedActiveAura;
 import com.github.kelemen.brazier.cards.Card;
@@ -1310,7 +1310,7 @@ public final class TargetlessActions {
 
         Aura<Object, Card> aura = Auras.buffAura(Buffs.setManaCost(manaCost));
         ActivatableAbility<Player> ability = deactivateAfterPlay(
-                Auras.aura(CardAuras.OWN_CARD_PROVIDER, filter, aura),
+                Auras.aura(AuraTargets.OWN_CARD_PROVIDER, filter, aura),
                 filter);
 
         return (World world, PlayerProperty actor) -> {
@@ -1326,7 +1326,7 @@ public final class TargetlessActions {
 
         Aura<Object, Card> aura = Auras.buffAura(Buffs.increaseManaCost(-amount));
         ActivatableAbility<Player> ability = deactivateAfterPlay(
-                Auras.aura(CardAuras.OWN_CARD_PROVIDER, filter, aura),
+                Auras.aura(AuraTargets.OWN_CARD_PROVIDER, filter, aura),
                 filter);
 
         return (World world, PlayerProperty actor) -> {
@@ -1342,7 +1342,7 @@ public final class TargetlessActions {
 
         Aura<Object, Card> aura = Auras.buffAura(Buffs.increaseManaCost(-amount));
         ActivatableAbility<Player> ability = deactivateAfterPlay(
-                Auras.aura(CardAuras.OWN_CARD_PROVIDER, filter, aura),
+                Auras.aura(AuraTargets.OWN_CARD_PROVIDER, filter, aura),
                 filter);
 
         return (World world, PlayerProperty actor) -> {
