@@ -120,16 +120,16 @@ public final class MinionAuras {
             @NamedArg("keywords") Keyword[] keywords) {
         Predicate<LabeledEntity> keywordFilter = ActionUtils.includedKeywordsFilter(keywords);
         return (World world, Object source, Minion target) -> {
-            // FIXME: This aura has to update after every minion added.
             Predicate<Minion> filter = (minion) -> {
                 return target != minion && keywordFilter.test(minion);
             };
 
-            int count1 = world.getPlayer1().getBoard().countMinions(filter);
-            int count2 = world.getPlayer2().getBoard().countMinions(filter);
+            return target.getBuffableAttack().addExternalBuff((prev) -> {
+                int count1 = world.getPlayer1().getBoard().countMinions(filter);
+                int count2 = world.getPlayer2().getBoard().countMinions(filter);
 
-            int buff = attack * (count1 + count2);
-            return target.getBuffableAttack().addExternalBuff(buff);
+                return prev + attack * (count1 + count2);
+            });
         };
     }
 
