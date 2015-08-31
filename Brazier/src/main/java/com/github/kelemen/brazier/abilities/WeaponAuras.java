@@ -2,7 +2,6 @@ package com.github.kelemen.brazier.abilities;
 
 import com.github.kelemen.brazier.PlayerProperty;
 import com.github.kelemen.brazier.World;
-import com.github.kelemen.brazier.parsing.NamedArg;
 import com.github.kelemen.brazier.weapons.Weapon;
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,12 +22,6 @@ public final class WeaponAuras {
         Weapon weapon = source.getOwner().tryGetWeapon();
         return weapon != null ? Collections.singletonList(weapon) : Collections.emptyList();
     };
-
-    public static Aura<Object, Weapon> attackBuff(@NamedArg("attack") int attack) {
-        return (World world, Object source, Weapon target) -> {
-            return target.getBuffableAttack().addExternalBuff(attack);
-        };
-    }
 
     private WeaponAuras() {
         throw new AssertionError();

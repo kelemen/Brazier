@@ -10,8 +10,11 @@
             "class": "Auras.ownWeaponAura",
             "filter": "TargetedActionConditions.SELF_DAMAGED",
             "aura": {
-                "class": "WeaponAuras.attackBuff",
-                "attack": 2
+                "class": "Auras.buffAura",
+                "buff": {
+                    "class": "Buffs.buffWeapon",
+                    "attack": 2
+                }
             }
         }
     }
