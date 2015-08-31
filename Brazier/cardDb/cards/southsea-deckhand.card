@@ -10,7 +10,10 @@
         "ability": {
             "class": "Auras.selfAura",
             "filter": "Auras.OWNER_HAS_WEAPON",
-            "aura": "MinionAuras.CHARGE"
+            "aura": {
+                "class": "Auras.buffAura",
+                "buff": "Buffs.CHARGE"
+            }
         }
     }
 }

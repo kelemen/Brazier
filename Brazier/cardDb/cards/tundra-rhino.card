@@ -10,7 +10,10 @@
         "ability": {
             "class": "Auras.sameBoardAura",
             "filter": "MinionAuras.TARGET_IS_BEAST",
-            "aura": "MinionAuras.CHARGE"
+            "aura": {
+                "class": "Auras.buffAura",
+                "buff": "Buffs.CHARGE"
+            }
         }
     }
 }

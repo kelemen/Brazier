@@ -9,13 +9,13 @@
         "ability": {
             "class": "Auras.selfAura",
             "filter": "MinionAuras.SELF_DAMAGED",
-            "aura": [
-                {
-                    "class": "Auras.buffAura",
-                    "buff": "1/0"
-                },
-                "MinionAuras.WIND_FURY"
-            ]
+            "aura": {
+                "class": "Auras.buffAura",
+                "buff": [
+                    "1/0",
+                    "Buffs.WIND_FURY"
+                ]
+            }
         }
     }
 }

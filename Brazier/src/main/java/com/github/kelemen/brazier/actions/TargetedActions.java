@@ -19,6 +19,7 @@ import com.github.kelemen.brazier.abilities.ActivatableAbility;
 import com.github.kelemen.brazier.abilities.AuraAwareIntProperty;
 import com.github.kelemen.brazier.abilities.Buff;
 import com.github.kelemen.brazier.abilities.BuffArg;
+import com.github.kelemen.brazier.abilities.Buffs;
 import com.github.kelemen.brazier.abilities.HpProperty;
 import com.github.kelemen.brazier.abilities.PermanentBuff;
 import com.github.kelemen.brazier.cards.Card;
@@ -81,9 +82,7 @@ public final class TargetedActions {
         return target.getProperties().getBody().setDivineShield(true);
     };
 
-    public static final TargetedAction<Object, Minion> CHARGE = (world, actor, target) -> {
-        return target.setCharge(true);
-    };
+    public static final TargetedAction<Object, Minion> CHARGE = buffTarget(Buffs.CHARGE.toPermanent());
 
     public static final TargetedAction<Object, Minion> STEALTH = (world, actor, target) -> {
         return target.getBody().setStealth(true);
@@ -160,7 +159,7 @@ public final class TargetedActions {
         };
     };
 
-    public static final TargetedAction<Object, Minion> WIND_FURY = windFury(2);
+    public static final TargetedAction<Object, Minion> WIND_FURY = buffTarget(Buffs.WIND_FURY.toPermanent());
 
     public static final TargetedAction<Object, Minion> ATTACK_HP_SWITCH = (World world, Object actor, Minion target) -> {
         MinionBody body = target.getBody();
@@ -522,14 +521,6 @@ public final class TargetedActions {
             @NamedArg("actions") TargetedAction<Actor, Target>[] actions) {
         return TargetedAction.merge(Arrays.asList(actions));
     }
-
-    public static TargetedAction<Object, Minion> windFury(@NamedArg("attackCount") int attackCount) {
-        return (World world, Object actor, Minion target) -> {
-            AuraAwareIntProperty maxAttackCount = target.getProperties().getMaxAttackCountProperty();
-            return maxAttackCount.addExternalBuff((prev) -> Math.max(prev, attackCount));
-        };
-    }
-
 
     private static UndoAction takeControlForThisTurn(Player newOwner, Minion minion) {
         World world = newOwner.getWorld();

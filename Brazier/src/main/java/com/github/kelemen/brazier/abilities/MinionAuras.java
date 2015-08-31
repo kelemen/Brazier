@@ -92,12 +92,6 @@ public final class MinionAuras {
         return target.getBody().getImmuneProperty().setValueToExternal(true);
     };
 
-    public static final Aura<Object, Minion> CHARGE = (world, source, target) -> {
-        return target.getProperties().getChargeProperty().setValueToExternal(true);
-    };
-
-    public static final Aura<Object, Minion> WIND_FURY = windFury(2);
-
     public static AuraFilter<Object, Minion> minionTargetNameIs(@NamedArg("name") String name) {
         ExceptionHelper.checkNotNullArgument(name, "name");
         return (World world, Object owner, Minion target) -> {
@@ -136,13 +130,6 @@ public final class MinionAuras {
     public static Aura<Object, Minion> minHp(@NamedArg("hp") int hp) {
         return (World world, Object source, Minion target) -> {
             return target.getBody().getMinHpProperty().addExternalBuff((prev) -> Math.max(prev, hp));
-        };
-    }
-
-    public static Aura<Object, Minion> windFury(@NamedArg("attackCount") int attackCount) {
-        return (World world, Object source, Minion target) -> {
-            AuraAwareIntProperty maxAttackCount = target.getProperties().getMaxAttackCountProperty();
-            return maxAttackCount.addExternalBuff((prev) -> Math.max(prev, attackCount));
         };
     }
 }

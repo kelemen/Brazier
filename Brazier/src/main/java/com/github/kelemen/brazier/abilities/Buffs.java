@@ -61,6 +61,20 @@ public final class Buffs {
 
     public static final PermanentBuff<Minion> WARLORD_BUFF = minionLeaderBuff(1, 1);
 
+    public static final Buff<Minion> WIND_FURY = windFury(2);
+
+    public static final Buff<Minion> CHARGE = (World world, Minion target, BuffArg arg) -> {
+        AuraAwareBoolProperty charge = target.getProperties().getChargeProperty();
+        return charge.setValueTo(arg, true);
+    };
+
+    public static Buff<Minion> windFury(@NamedArg("attackCount") int attackCount) {
+        return (World world, Minion target, BuffArg arg) -> {
+            AuraAwareIntProperty maxAttackCount = target.getProperties().getMaxAttackCountProperty();
+            return maxAttackCount.addRemovableBuff(arg, (prev) -> Math.max(prev, attackCount));
+        };
+    }
+
     public static PermanentBuff<Minion> setAttack(@NamedArg("attack") int attack) {
         return (World world, Minion target, BuffArg arg) -> {
             return target.getBuffableAttack().setValueTo(arg, attack);
