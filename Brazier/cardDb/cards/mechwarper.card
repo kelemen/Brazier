@@ -12,7 +12,7 @@
             "filter": [
                 "TargetedActionConditions.TARGET_IS_MINION",
                 "TargetedActionConditions.TARGET_IS_MECH",
-                "Auras.SAME_OWNER"
+                "TargetedActionConditions.SAME_OWNER"
             ],
             "aura": {
                 "class": "Auras.buffAura",

@@ -10,8 +10,11 @@
         "ability": {
             "class": "Auras.selfAura",
             "filter": {
-                "class": "Auras.opponentsHandLarger",
-                "limit": 5
+                "class": "TargetedActionConditions.forActor",
+                "filter": {
+                    "class": "EntityFilters.opponentsHandLarger",
+                    "limit": 5
+                }
             },
             "aura": {
                 "class": "Auras.buffAura",

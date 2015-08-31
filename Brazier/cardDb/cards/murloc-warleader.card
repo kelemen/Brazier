@@ -12,7 +12,7 @@
             "class": "Auras.boardAura",
             "filter": [
                 "TargetedActionConditions.TARGET_IS_MURLOC",
-                "Auras.NOT_SELF"
+                "TargetedActionConditions.NOT_SELF"
             ],
             "aura": {
                 "class": "Auras.buffAura",

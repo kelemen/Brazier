@@ -109,6 +109,10 @@ public final class EntityFilters {
         return (target) -> target.getAttackTool().isFrozen();
     }
 
+    public static <Entity extends PlayerProperty> Predicate<Entity> ownerHasWeapon() {
+        return (target) -> target.getOwner().tryGetWeapon() != null;
+    }
+
     public static <Entity extends PlayerProperty> Predicate<Entity> ownBoardHas(
             @NamedArg("filter") Predicate<? super Minion> filter) {
         ExceptionHelper.checkNotNullArgument(filter, "filter");
@@ -155,6 +159,16 @@ public final class EntityFilters {
 
     public static <Entity extends PlayerProperty> Predicate<Entity> isEmptyHand() {
         return (target) -> target.getOwner().getHand().getCardCount() == 0;
+    }
+
+    public static <Entity extends PlayerProperty> Predicate<Entity> notPlayedMinionThisTurn() {
+        return (target) -> target.getOwner().getMinionsPlayedThisTurn() == 0;
+    }
+
+    public static <Entity extends PlayerProperty> Predicate<Entity> opponentsHandLarger(@NamedArg("limit") int limit) {
+        return (Entity target) -> {
+            return target.getOwner().getOpponent().getHand().getCardCount() > limit;
+        };
     }
 
     private EntityFilters() {

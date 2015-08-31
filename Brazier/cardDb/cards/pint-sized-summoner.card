@@ -11,7 +11,10 @@
             "class": "Auras.ownCardAura",
             "filter": [
                 "TargetedActionConditions.TARGET_IS_MINION",
-                "Auras.NOT_PLAYED_MINION_THIS_TURN"
+                {
+                    "class": "TargetedActionConditions.forActor",
+                    "filter": "EntityFilters.notPlayedMinionThisTurn"
+                }
             ],
             "aura": {
                 "class": "Auras.buffAura",

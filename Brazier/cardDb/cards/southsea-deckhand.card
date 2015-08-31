@@ -9,7 +9,10 @@
         "hp": 1,
         "ability": {
             "class": "Auras.selfAura",
-            "filter": "Auras.OWNER_HAS_WEAPON",
+            "filter": {
+                "class": "TargetedActionConditions.forActor",
+                "filter": "EntityFilters.ownerHasWeapon"
+            },
             "aura": {
                 "class": "Auras.buffAura",
                 "buff": "Buffs.CHARGE"

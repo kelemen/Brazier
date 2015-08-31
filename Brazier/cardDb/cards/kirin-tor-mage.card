@@ -9,10 +9,7 @@
         "hp": 3,
         "battleCries": {
             "class": "TargetlessActions.setManaCostThisTurn",
-            "filter": {
-                "class": "Auras.targetHasKeyword",
-                "keywords": "secret"
-            },
+            "filter": "TargetedActionConditions.TARGET_IS_SECRET",
             "manaCost": 0
         }
     }
