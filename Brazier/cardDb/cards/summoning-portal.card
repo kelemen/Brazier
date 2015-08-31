@@ -10,8 +10,12 @@
             "class": "Auras.cardAura",
             "filter": "TargetedActionConditions.TARGET_IS_MINION",
             "aura": {
-                "class": "CardAuras.decreaseManaCostWithLimit",
-                "amount": 2
+                "class": "Auras.buffAura",
+                "priority": -2147483648,
+                "buff": {
+                    "class": "Buffs.decreaseManaCostWithLimit",
+                    "amount": 2
+                }
             }
         }
     }

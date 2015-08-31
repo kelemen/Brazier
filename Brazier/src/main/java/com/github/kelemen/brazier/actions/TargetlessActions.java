@@ -27,6 +27,7 @@ import com.github.kelemen.brazier.abilities.Aura;
 import com.github.kelemen.brazier.abilities.AuraTargetProvider;
 import com.github.kelemen.brazier.abilities.Auras;
 import com.github.kelemen.brazier.abilities.Buff;
+import com.github.kelemen.brazier.abilities.Buffs;
 import com.github.kelemen.brazier.abilities.CardAuras;
 import com.github.kelemen.brazier.abilities.PermanentBuff;
 import com.github.kelemen.brazier.abilities.TargetedActiveAura;
@@ -1307,15 +1308,14 @@ public final class TargetlessActions {
             @NamedArg("filter") TargetedActionCondition<? super Player, ? super Card> filter) {
         ExceptionHelper.checkNotNullArgument(filter, "filter");
 
-        return (World world, PlayerProperty actor) -> {
-            ActivatableAbility<Player> aura = Auras.aura(
-                    CardAuras.OWN_CARD_PROVIDER,
-                    filter,
-                    CardAuras.setManaCost(manaCost));
-            aura = deactivateAfterPlay(aura, filter);
-            aura = ActionUtils.toSingleTurnAbility(world, aura);
+        Aura<Object, Card> aura = Auras.buffAura(Buffs.setManaCost(manaCost));
+        ActivatableAbility<Player> ability = deactivateAfterPlay(
+                Auras.aura(CardAuras.OWN_CARD_PROVIDER, filter, aura),
+                filter);
 
-            return aura.activate(actor.getOwner());
+        return (World world, PlayerProperty actor) -> {
+            ActivatableAbility<Player> thisTurnAbility = ActionUtils.toSingleTurnAbility(world, ability);
+            return thisTurnAbility.activate(actor.getOwner());
         };
     }
 
@@ -1324,15 +1324,14 @@ public final class TargetlessActions {
             @NamedArg("filter") TargetedActionCondition<? super Player, ? super Card> filter) {
         ExceptionHelper.checkNotNullArgument(filter, "filter");
 
-        return (World world, PlayerProperty actor) -> {
-            ActivatableAbility<Player> aura = Auras.aura(
-                    CardAuras.OWN_CARD_PROVIDER,
-                    filter,
-                    CardAuras.increaseManaCost(-amount));
-            aura = deactivateAfterPlay(aura, filter);
-            aura = ActionUtils.toSingleTurnAbility(world, aura);
+        Aura<Object, Card> aura = Auras.buffAura(Buffs.increaseManaCost(-amount));
+        ActivatableAbility<Player> ability = deactivateAfterPlay(
+                Auras.aura(CardAuras.OWN_CARD_PROVIDER, filter, aura),
+                filter);
 
-            return aura.activate(actor.getOwner());
+        return (World world, PlayerProperty actor) -> {
+            ActivatableAbility<Player> thisTurnAbility = ActionUtils.toSingleTurnAbility(world, ability);
+            return thisTurnAbility.activate(actor.getOwner());
         };
     }
 
@@ -1341,14 +1340,13 @@ public final class TargetlessActions {
             @NamedArg("filter") TargetedActionCondition<? super Player, ? super Card> filter) {
         ExceptionHelper.checkNotNullArgument(filter, "filter");
 
-        return (World world, PlayerProperty actor) -> {
-            ActivatableAbility<Player> aura = Auras.aura(
-                    CardAuras.OWN_CARD_PROVIDER,
-                    filter,
-                    CardAuras.increaseManaCost(-amount));
-            aura = deactivateAfterPlay(aura, filter);
+        Aura<Object, Card> aura = Auras.buffAura(Buffs.increaseManaCost(-amount));
+        ActivatableAbility<Player> ability = deactivateAfterPlay(
+                Auras.aura(CardAuras.OWN_CARD_PROVIDER, filter, aura),
+                filter);
 
-            return aura.activate(actor.getOwner());
+        return (World world, PlayerProperty actor) -> {
+            return ability.activate(actor.getOwner());
         };
     }
 

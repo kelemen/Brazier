@@ -10,8 +10,11 @@
             "class": "Auras.cardAura",
             "filter": "TargetedActionConditions.TARGET_HAS_BATTLE_CRY",
             "aura": {
-                "class": "CardAuras.increaseManaCost",
-                "amount": 2
+                "class": "Auras.buffAura",
+                "buff": {
+                    "class": "Buffs.increaseManaCost",
+                    "amount": 2
+                }
             }
         }
     }

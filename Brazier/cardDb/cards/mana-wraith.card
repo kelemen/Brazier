@@ -11,8 +11,11 @@
             "class": "Auras.cardAura",
             "filter": "TargetedActionConditions.TARGET_IS_MINION",
             "aura": {
-                "class": "CardAuras.increaseManaCost",
-                "amount": 1
+                "class": "Auras.buffAura",
+                "buff": {
+                    "class": "Buffs.increaseManaCost",
+                    "amount": 1
+                }
             }
         }
     }

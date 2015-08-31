@@ -10,8 +10,11 @@
         "battleCries": {
             "class": "TargetlessActions.untilTurnStartsAura",
             "aura": {
-                "class": "CardAuras.increaseManaCost",
-                "amount": 5
+                "class": "Auras.buffAura",
+                "buff": {
+                    "class": "Buffs.increaseManaCost",
+                    "amount": 5
+                }
             },
             "filter": "TargetedActionConditions.TARGET_IS_SPELL",
             "target": "CardAuras.OPPONENT_CARD_PROVIDER"

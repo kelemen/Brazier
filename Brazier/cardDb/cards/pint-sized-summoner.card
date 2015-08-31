@@ -14,8 +14,11 @@
                 "Auras.NOT_PLAYED_MINION_THIS_TURN"
             ],
             "aura": {
-                "class": "CardAuras.increaseManaCost",
-                "amount": -1
+                "class": "Auras.buffAura",
+                "buff": {
+                    "class": "Buffs.increaseManaCost",
+                    "amount": -1
+                }
             }
         }
     }

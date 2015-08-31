@@ -10,6 +10,7 @@ import com.github.kelemen.brazier.TargetableCharacter;
 import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.actions.ActionUtils;
 import com.github.kelemen.brazier.actions.UndoAction;
+import com.github.kelemen.brazier.cards.Card;
 import com.github.kelemen.brazier.events.UndoableUnregisterRef;
 import com.github.kelemen.brazier.events.UndoableUnregisterRefBuilder;
 import com.github.kelemen.brazier.minions.Minion;
@@ -339,6 +340,34 @@ public final class Buffs {
 
         return (World world, Player target, BuffArg arg) -> {
             return target.getAuraFlags().registerFlag(flag);
+        };
+    }
+
+    public static Buff<Card> increaseManaCost(@NamedArg("amount") int amount) {
+        return (World world, Card target, BuffArg arg) -> {
+            return target.getRawManaCost().addRemovableBuff(amount);
+        };
+    }
+
+    public static Buff<Card> decreaseManaCostWithLimit(@NamedArg("amount") int amount) {
+        return decreaseManaCostWithLimit(amount, 1);
+    }
+
+    public static Buff<Card> decreaseManaCostWithLimit(
+            @NamedArg("amount") int amount,
+            @NamedArg("limit") int limit) {
+        return (World world, Card target, BuffArg arg) -> {
+            return target.getRawManaCost().addRemovableBuff(arg, (prevValue) -> {
+                return prevValue > limit
+                        ? Math.max(limit, prevValue - amount)
+                        : prevValue;
+            });
+        };
+    }
+
+    public static Buff<Card> setManaCost(@NamedArg("manaCost") int manaCost) {
+        return (World world, Card target, BuffArg arg) -> {
+            return target.getRawManaCost().setValueTo(arg, 0);
         };
     }
 
