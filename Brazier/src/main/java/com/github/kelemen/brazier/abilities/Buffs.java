@@ -57,7 +57,7 @@ public final class Buffs {
         return buff(target, arg, 0, target.getOwner().getHand().getCardCount());
     };
 
-    public static final PermanentBuff<Minion> INNER_FIRE = (world, target, arg) -> {
+    public static final Buff<Minion> INNER_FIRE = (world, target, arg) -> {
         int hp = target.getBody().getCurrentHp();
         return target.getProperties().getBuffableAttack().setValueTo(arg, hp);
     };
@@ -90,7 +90,7 @@ public final class Buffs {
         };
     }
 
-    public static PermanentBuff<Minion> setAttack(@NamedArg("attack") int attack) {
+    public static Buff<Minion> setAttack(@NamedArg("attack") int attack) {
         return (World world, Minion target, BuffArg arg) -> {
             return target.getBuffableAttack().setValueTo(arg, attack);
         };
@@ -120,12 +120,12 @@ public final class Buffs {
         });
     }
 
-    public static PermanentBuff<Minion> buffAttack(
+    public static Buff<TargetableCharacter> buffAttack(
             @NamedArg("minAttack") int minAttack,
             @NamedArg("maxAttack") int maxAttack) {
-        return (World world, Minion target, BuffArg arg) -> {
+        return (World world, TargetableCharacter target, BuffArg arg) -> {
             int buff = world.getRandomProvider().roll(minAttack, maxAttack);
-            return target.getBuffableAttack().addBuff(arg, buff);
+            return buffAttack(arg, target, buff);
         };
     }
 
@@ -133,8 +133,8 @@ public final class Buffs {
         return buff(0, hp);
     }
 
-    public static PermanentBuff<TargetableCharacter> buffAttack(@NamedArg("attack") int attack) {
-        return buff(attack, 0);
+    public static Buff<TargetableCharacter> buffAttack(@NamedArg("attack") int attack) {
+        return buffAttack(attack, attack);
     }
 
     public static PermanentBuff<TargetableCharacter> buff(
@@ -219,7 +219,7 @@ public final class Buffs {
             @NamedArg("attack") int attack,
             @NamedArg("hp") int hp) {
         if (hp == 0) {
-            return (world, target, arg) -> buffAttack(arg, target, attack);
+            return buffAttack(attack);
         }
         if (attack == 0) {
             return (world, target, arg) -> buffHp(arg, target, hp);
