@@ -4,6 +4,7 @@ import com.github.kelemen.brazier.BoardSide;
 import com.github.kelemen.brazier.Hero;
 import com.github.kelemen.brazier.Keyword;
 import com.github.kelemen.brazier.LabeledEntity;
+import com.github.kelemen.brazier.Player;
 import com.github.kelemen.brazier.Priorities;
 import com.github.kelemen.brazier.TargetableCharacter;
 import com.github.kelemen.brazier.World;
@@ -16,8 +17,18 @@ import com.github.kelemen.brazier.parsing.NamedArg;
 import com.github.kelemen.brazier.weapons.Weapon;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import org.jtrim.utils.ExceptionHelper;
 
 public final class Buffs {
+    public static final Buff<Player> DUPLICATE_DEATH_RATTLE = (world, target, arg) -> {
+        return target.getDeathRattleTriggerCount().addRemovableBuff(arg, (int prev) -> Math.max(prev, 2));
+    };
+
+    public static final Buff<Player> DAMAGING_HEAL = (world, target, arg) -> {
+        // FIXME: Use arg
+        return target.getDamagingHealAura().addBuff(true);
+    };
+
     public static Buff<TargetableCharacter> IMMUNE = (World world, TargetableCharacter target, BuffArg arg) -> {
         if (target instanceof Minion) {
             Minion minion = (Minion)target;
@@ -320,6 +331,14 @@ public final class Buffs {
     public static Buff<Minion> minHp(@NamedArg("hp") int hp) {
         return (World world, Minion target, BuffArg arg) -> {
             return target.getBody().getMinHpProperty().addRemovableBuff(arg, (prev) -> Math.max(prev, hp));
+        };
+    }
+
+    public static Buff<Player> playerFlag(@NamedArg("flag") Keyword flag) {
+        ExceptionHelper.checkNotNullArgument(flag, "flag");
+
+        return (World world, Player target, BuffArg arg) -> {
+            return target.getAuraFlags().registerFlag(flag);
         };
     }
 

@@ -9,7 +9,10 @@
         "hp": 7,
         "ability": {
             "class": "Auras.ownPlayerAura",
-            "aura": "HeroAuras.DUPLICATE_DEATH_RATTLE"
+            "aura": {
+                "class": "Auras.buffAura",
+                "buff": "Buffs.DUPLICATE_DEATH_RATTLE"
+            }
         }
     }
 }

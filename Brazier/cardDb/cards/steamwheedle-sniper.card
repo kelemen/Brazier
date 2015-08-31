@@ -10,8 +10,11 @@
         "ability": {
             "class": "Auras.ownPlayerAura",
             "aura": {
-                "class": "HeroAuras.playerFlag",
-                "flag": "steady-shot-snipe"
+                "class": "Auras.buffAura",
+                "buff": {
+                    "class": "Buffs.playerFlag",
+                    "flag": "steady-shot-snipe"
+                }
             }
         }
     }
