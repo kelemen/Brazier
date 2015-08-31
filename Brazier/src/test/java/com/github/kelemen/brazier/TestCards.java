@@ -62,6 +62,7 @@ public final class TestCards {
     public static final String KEZAN_MYSTIC = "Kezan Mystic";
     public static final String KOBOLD_GEOMANCER = "Kobold Geomancer";
     public static final String KORKRON_ELITE = "Kor'kron Elite";
+    public static final String LIGHTSPAWN = "Lightspawn";
     public static final String LOST_TALLSTRIDER = "Lost Tallstrider";
     public static final String MALGANIS = "Mal'Ganis";
     public static final String MALYGOS = "Malygos";

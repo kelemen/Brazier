@@ -8,7 +8,6 @@ import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.abilities.ActivatableAbility;
 import com.github.kelemen.brazier.abilities.AuraAwareBoolProperty;
 import com.github.kelemen.brazier.abilities.AuraAwareIntProperty;
-import com.github.kelemen.brazier.abilities.OwnedIntPropertyBuff;
 import com.github.kelemen.brazier.actions.UndoAction;
 import com.github.kelemen.brazier.actions.UndoBuilder;
 import com.github.kelemen.brazier.events.WorldEventAction;
@@ -189,10 +188,6 @@ public final class MinionProperties implements Silencable {
         return abilities.getOwned().addAndActivateAbility(abilityRegisterTask);
     }
 
-    public UndoAction setAttackFinalizer(OwnedIntPropertyBuff<? super Minion> newAttackFinalizer) {
-        return attackTool.setAttackFinalizer(newAttackFinalizer);
-    }
-
     public UndoAction setCharge(boolean newCharge) {
         return attackTool.setCharge(newCharge);
     }
@@ -226,7 +221,6 @@ public final class MinionProperties implements Silencable {
         private final AuraAwareIntProperty maxAttackCount;
         private boolean exhausted;
         private final AuraAwareBoolProperty charge;
-        private OwnedIntPropertyBuff<? super Minion> attackFinalizer;
 
         private boolean attackLeft;
         private boolean attackRight;
@@ -241,7 +235,6 @@ public final class MinionProperties implements Silencable {
             this.charge = new AuraAwareBoolProperty(baseDescr.isCharge());
             this.attackLeft = baseDescr.isAttackLeft();
             this.attackRight = baseDescr.isAttackRight();
-            this.attackFinalizer = baseDescr.getAttackFinalizer();
         }
 
         public MinionAttackTool(MinionAttackTool base) {
@@ -254,14 +247,6 @@ public final class MinionProperties implements Silencable {
             this.charge = base.charge.copy();
             this.attackLeft = base.attackLeft;
             this.attackRight = base.attackRight;
-            this.attackFinalizer = base.attackFinalizer;
-        }
-
-        public UndoAction setAttackFinalizer(OwnedIntPropertyBuff<? super Minion> newAttackFinalizer) {
-            ExceptionHelper.checkNotNullArgument(newAttackFinalizer, "newAttackFinalizer");
-            OwnedIntPropertyBuff<? super Minion> prevAttackFinalizer = attackFinalizer;
-            attackFinalizer = newAttackFinalizer;
-            return () -> attackFinalizer = prevAttackFinalizer;
         }
 
         public UndoAction setCharge(boolean newCharge) {
@@ -291,12 +276,6 @@ public final class MinionProperties implements Silencable {
             if (!canAttack) {
                 canAttack = true;
                 result.addUndo(() -> canAttack = false);
-            }
-
-            OwnedIntPropertyBuff<? super Minion> prevAttackFinalizer = attackFinalizer;
-            if (prevAttackFinalizer != OwnedIntPropertyBuff.IDENTITY) {
-                attackFinalizer = OwnedIntPropertyBuff.IDENTITY;
-                result.addUndo(() -> attackFinalizer = prevAttackFinalizer);
             }
 
             result.addUndo(removeSwipeAttack());
@@ -332,7 +311,7 @@ public final class MinionProperties implements Silencable {
 
         @Override
         public int getAttack() {
-            return attackFinalizer.buffProperty(minion, attack.getValue());
+            return Math.max(0, attack.getValue());
         }
 
         @Override

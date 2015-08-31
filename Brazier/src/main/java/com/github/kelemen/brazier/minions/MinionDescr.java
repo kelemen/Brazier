@@ -6,7 +6,6 @@ import com.github.kelemen.brazier.Player;
 import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.abilities.ActivatableAbility;
 import com.github.kelemen.brazier.abilities.LivingEntitiesAbilities;
-import com.github.kelemen.brazier.abilities.OwnedIntPropertyBuff;
 import com.github.kelemen.brazier.actions.PlayActionDef;
 import com.github.kelemen.brazier.actions.PlayArg;
 import com.github.kelemen.brazier.actions.UndoAction;
@@ -47,8 +46,6 @@ public final class MinionDescr implements HearthStoneEntity {
         private boolean attackLeft;
         private boolean attackRight;
 
-        private OwnedIntPropertyBuff<? super Minion> attackFinalizer;
-
         public Builder(MinionId minionId, int attack, int hp, Supplier<? extends CardDescr> baseCardRef) {
             ExceptionHelper.checkNotNullArgument(minionId, "minionId");
             ExceptionHelper.checkNotNullArgument(baseCardRef, "baseCardRef");
@@ -70,7 +67,6 @@ public final class MinionDescr implements HearthStoneEntity {
             this.abilities = LivingEntitiesAbilities.noAbilities();
             this.attackLeft = false;
             this.attackRight = false;
-            this.attackFinalizer = OwnedIntPropertyBuff.IDENTITY;
         }
 
         public void setAbilities(LivingEntitiesAbilities<Minion> abilities) {
@@ -85,11 +81,6 @@ public final class MinionDescr implements HearthStoneEntity {
 
         public void setCanAttack(boolean canAttack) {
             this.canAttack = canAttack;
-        }
-
-        public void setAttackFinalizer(OwnedIntPropertyBuff<? super Minion> attackFinalizer) {
-            ExceptionHelper.checkNotNullArgument(attackFinalizer, "attackFinalizer");
-            this.attackFinalizer = attackFinalizer;
         }
 
         public void setAttackLeft(boolean attackLeft) {
@@ -156,7 +147,6 @@ public final class MinionDescr implements HearthStoneEntity {
     private final boolean stealth;
     private final boolean attackLeft;
     private final boolean attackRight;
-    private final OwnedIntPropertyBuff<? super Minion> attackFinalizer;
 
     private MinionDescr(Builder builder) {
         this.minionId = builder.minionId;
@@ -171,7 +161,6 @@ public final class MinionDescr implements HearthStoneEntity {
         this.divineShield = builder.divineShield;
         this.charge = builder.charge;
         this.canAttack = builder.canAttack;
-        this.attackFinalizer = builder.attackFinalizer;
         this.maxAttackCount = builder.maxAttackCount;
         this.targetable = builder.targetable;
         this.stealth = builder.stealth;
@@ -209,10 +198,6 @@ public final class MinionDescr implements HearthStoneEntity {
 
     public String getDisplayName() {
         return displayName;
-    }
-
-    public OwnedIntPropertyBuff<? super Minion> getAttackFinalizer() {
-        return attackFinalizer;
     }
 
     @Override

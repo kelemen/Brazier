@@ -68,13 +68,6 @@ public final class MinionParser {
             result.setTargetable(targetableElement.getAsBoolean());
         }
 
-        JsonTree attackWithHpElement = root.getChild("attackWithHp");
-        if (attackWithHpElement != null) {
-            if (attackWithHpElement.getAsBoolean()) {
-                result.setAttackFinalizer((owner, prev) -> owner.getBody().getCurrentHp());
-            }
-        }
-
         JsonTree stealthElement = root.getChild("stealth");
         if (stealthElement != null) {
             result.setStealth(stealthElement.getAsBoolean());

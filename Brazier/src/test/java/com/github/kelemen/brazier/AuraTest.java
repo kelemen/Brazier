@@ -6,6 +6,30 @@ import static com.github.kelemen.brazier.TestCards.*;
 
 public final class AuraTest {
     @Test
+    public void testLightspawn() {
+        PlayScript.testScript((script) -> {
+            script.setMana("p1", 10);
+
+            script.playMinionCard("p1", LIGHTSPAWN, 0);
+
+            script.expectBoard("p1",
+                    expectedMinion(LIGHTSPAWN, 5, 5));
+
+            script.playCard("p1", HUMILITY, "p1:0");
+
+            script.expectBoard("p1",
+                    expectedMinion(LIGHTSPAWN, 5, 5));
+
+            script.playCard("p1", SILENCE, "p1:0");
+
+            script.expectBoard("p1",
+                    expectedMinion(LIGHTSPAWN, 0, 5));
+
+            script.playMinionCard("p1", DIRE_WOLF_ALPHA, 2);
+        });
+    }
+
+    @Test
     public void testDireWolfAlpha() {
         PlayScript.testScript((script) -> {
             script.setMana("p1", 10);

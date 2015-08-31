@@ -6,6 +6,13 @@
     "minion": {
         "attack": 0,
         "hp": 5,
-        "attackWithHp": true
+        "ability": {
+            "class": "Auras.selfAura",
+            "aura": {
+                "class": "Auras.buffAura",
+                "priority": "highest",
+                "buff": "Buffs.INNER_FIRE"
+            }
+        }
     }
 }
