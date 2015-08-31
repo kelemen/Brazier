@@ -13,9 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class CardAuras {
-    public static final TargetedActionCondition<PlayerProperty, PlayerProperty> SAME_OWNER = MinionAuras.SAME_OWNER;
-    public static final TargetedActionCondition<PlayerProperty, PlayerProperty> SAME_OWNER_OTHERS = MinionAuras.SAME_OWNER_OTHERS;
-
     public static final TargetedActionCondition<Object, LabeledEntity> TARGET_IS_MINION = Auras.targetHasKeyword(Keywords.MINION);
     public static final TargetedActionCondition<Object, LabeledEntity> TARGET_IS_SPELL = Auras.targetHasKeyword(Keywords.SPELL);
     public static final TargetedActionCondition<Object, LabeledEntity> TARGET_HAS_BATTLE_CRY = Auras.targetHasKeyword(Keywords.BATTLE_CRY);

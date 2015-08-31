@@ -8,7 +8,7 @@
         "hp": 3,
         "ability": {
             "class": "Auras.selfAura",
-            "filter": "MinionAuras.SELF_DAMAGED",
+            "filter": "TargetedActionConditions.SELF_DAMAGED",
             "aura": {
                 "class": "Auras.buffAura",
                 "buff": "3/0"

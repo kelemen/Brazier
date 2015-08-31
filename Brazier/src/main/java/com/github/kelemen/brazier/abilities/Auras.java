@@ -27,6 +27,10 @@ public final class Auras {
         return source.getOwner() == target.getOwner();
     };
 
+    public static final TargetedActionCondition<PlayerProperty, PlayerProperty> SAME_OWNER_OTHERS = (world, source, target) -> {
+        return source.getOwner() == target.getOwner() && source != target;
+    };
+
     public static final TargetedActionCondition<PlayerProperty, Object> NOT_PLAYED_MINION_THIS_TURN = (world, source, target) -> {
         return source.getOwner().getMinionsPlayedThisTurn() == 0;
     };
