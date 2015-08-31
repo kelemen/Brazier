@@ -11,7 +11,7 @@
             "filter": "TargetedActionConditions.TARGET_IS_MINION",
             "aura": {
                 "class": "Auras.buffAura",
-                "priority": -2147483648,
+                "priority": "lowest",
                 "buff": {
                     "class": "Buffs.decreaseManaCostWithLimit",
                     "amount": 2

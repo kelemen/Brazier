@@ -8,7 +8,7 @@ import com.github.kelemen.brazier.Keyword;
 import com.github.kelemen.brazier.Keywords;
 import com.github.kelemen.brazier.Player;
 import com.github.kelemen.brazier.PlayerProperty;
-import com.github.kelemen.brazier.Priorities;
+import com.github.kelemen.brazier.Priority;
 import com.github.kelemen.brazier.Silencable;
 import com.github.kelemen.brazier.TargetableCharacter;
 import com.github.kelemen.brazier.UndoableIntResult;
@@ -16,7 +16,6 @@ import com.github.kelemen.brazier.UndoableResult;
 import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.abilities.ActivatableAbilities;
 import com.github.kelemen.brazier.abilities.ActivatableAbility;
-import com.github.kelemen.brazier.abilities.AuraAwareIntProperty;
 import com.github.kelemen.brazier.abilities.Buff;
 import com.github.kelemen.brazier.abilities.BuffArg;
 import com.github.kelemen.brazier.abilities.Buffs;
@@ -241,7 +240,7 @@ public final class TargetedActions {
                         AttackRequest.class);
 
                 Predicate<AttackRequest> condition = (attackRequest) -> attackRequest.getAttacker() == self;
-                return listeners.addAction(Priorities.LOW_PRIORITY, condition, (attackWorld, attackRequest) -> {
+                return listeners.addAction(Priority.LOW_PRIORITY.getValue(), condition, (attackWorld, attackRequest) -> {
                     return action.alterWorld(attackWorld, actor);
                 });
             });

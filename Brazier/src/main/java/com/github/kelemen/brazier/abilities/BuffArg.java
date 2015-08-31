@@ -1,10 +1,10 @@
 package com.github.kelemen.brazier.abilities;
 
-import com.github.kelemen.brazier.Priorities;
+import com.github.kelemen.brazier.Priority;
 
 public final class BuffArg {
-    public static final BuffArg NORMAL_BUFF = ownedBuff(Priorities.NORMAL_PRIORITY);
-    public static final BuffArg NORMAL_AURA_BUFF = externalBuff(Priorities.HIGH_PRIORITY);
+    public static final BuffArg NORMAL_BUFF = ownedBuff(Priority.NORMAL_PRIORITY.getValue());
+    public static final BuffArg NORMAL_AURA_BUFF = externalBuff(Priority.HIGH_PRIORITY.getValue());
 
     private final int priority;
     private final boolean external;
@@ -23,7 +23,7 @@ public final class BuffArg {
     }
 
     public void checkNormalBuff() {
-        if (external || getPriority() != Priorities.NORMAL_PRIORITY) {
+        if (external || getPriority() != Priority.NORMAL_PRIORITY.getValue()) {
             throw new UnsupportedOperationException("Unsupported buff: " + this);
         }
     }

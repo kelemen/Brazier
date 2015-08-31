@@ -5,7 +5,7 @@ import com.github.kelemen.brazier.Hero;
 import com.github.kelemen.brazier.Keyword;
 import com.github.kelemen.brazier.LabeledEntity;
 import com.github.kelemen.brazier.Player;
-import com.github.kelemen.brazier.Priorities;
+import com.github.kelemen.brazier.Priority;
 import com.github.kelemen.brazier.TargetableCharacter;
 import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.actions.ActionUtils;
@@ -192,7 +192,7 @@ public final class Buffs {
     }
 
     private static UndoableUnregisterRef buffHp(BuffArg arg, TargetableCharacter target, int hp) {
-        if (hp != 0 && (arg.getPriority() != Priorities.HIGH_PRIORITY || !arg.isExternal())) {
+        if (hp != 0 && (arg.getPriority() != Priority.HIGH_PRIORITY.getValue() || !arg.isExternal())) {
             throw new UnsupportedOperationException("Temporary health buffs are only supported standard auras.");
         }
 

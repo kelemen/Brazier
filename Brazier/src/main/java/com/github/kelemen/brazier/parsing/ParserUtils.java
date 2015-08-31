@@ -4,6 +4,7 @@ import com.github.kelemen.brazier.HearthStoneDb;
 import com.github.kelemen.brazier.Hero;
 import com.github.kelemen.brazier.Keyword;
 import com.github.kelemen.brazier.PlayerProperty;
+import com.github.kelemen.brazier.Priority;
 import com.github.kelemen.brazier.TargetableCharacter;
 import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.abilities.ActivatableAbility;
@@ -244,6 +245,7 @@ public final class ParserUtils {
         result.setCustomStringParser(MinionId.class, (str) -> new MinionId(str));
         result.setCustomStringParser(WeaponId.class, (str) -> new WeaponId(str));
         result.setCustomStringParser(SimpleEventType.class, SimpleEventType::tryParse);
+        result.setCustomStringParser(Priority.class, Priority::parse);
 
         result.setCustomStringParser(Buff.class, (String str) -> {
             BuffDescr buffDescr = BuffDescr.tryCreate(str);

@@ -1,6 +1,6 @@
 package com.github.kelemen.brazier.actions;
 
-import com.github.kelemen.brazier.Priorities;
+import com.github.kelemen.brazier.Priority;
 import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.events.UndoableUnregisterRef;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public final class WorldActionList<T> {
     }
 
     public UndoableUnregisterRef addAction(WorldObjectAction<T> action) {
-        return addAction(Priorities.NORMAL_PRIORITY, (arg) -> true, action);
+        return addAction(Priority.NORMAL_PRIORITY.getValue(), (arg) -> true, action);
     }
 
     private static <T> int getPriority(RefList.ElementRef<ActionWrapper<T>> ref) {

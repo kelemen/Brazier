@@ -1,7 +1,7 @@
 package com.github.kelemen.brazier.parsing;
 
 import com.github.kelemen.brazier.PlayerProperty;
-import com.github.kelemen.brazier.Priorities;
+import com.github.kelemen.brazier.Priority;
 import com.github.kelemen.brazier.World;
 import com.github.kelemen.brazier.actions.BasicFilters;
 import com.github.kelemen.brazier.actions.UndoAction;
@@ -17,7 +17,6 @@ import com.github.kelemen.brazier.events.WorldEventFilter;
 import com.github.kelemen.brazier.events.WorldEvents;
 import com.github.kelemen.brazier.minions.Minion;
 import com.google.gson.JsonPrimitive;
-import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import org.jtrim.utils.ExceptionHelper;
@@ -119,25 +118,13 @@ public final class EventNotificationParser<Self extends PlayerProperty> {
     private int getPriority(JsonTree actionDefElement) {
         JsonTree priorityElement = actionDefElement.getChild("priority");
         if (priorityElement == null) {
-            return Priorities.NORMAL_PRIORITY;
+            return Priority.NORMAL_PRIORITY.getValue();
         }
 
         JsonPrimitive value = priorityElement.getAsJsonPrimitive();
-        if (value.isString()) {
-            switch (value.getAsString().toLowerCase(Locale.ROOT)) {
-                case "lowest":
-                    return Priorities.LOWEST_PRIORITY;
-                case "low":
-                    return Priorities.LOW_PRIORITY;
-                case "normal":
-                    return Priorities.NORMAL_PRIORITY;
-                case "high":
-                    return Priorities.HIGH_PRIORITY;
-                case "highest":
-                    return Priorities.HIGHEST_PRIORITY;
-            }
-        }
-        return priorityElement.getAsInt();
+        return value.isString()
+                ? Priority.parsePriorityValue(value.getAsString())
+                : priorityElement.getAsInt();
     }
 
     private <T> WorldEventBasedActionDef<Self, T> tryParseActionDef(
